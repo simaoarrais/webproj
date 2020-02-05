@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-8">
+        <section id="registrationForm">
+            <form action="." method="post" class="form-horizontal">
+                {% csrf_token %}
+                <h3>
+                    <p>
+                        <i class="fas fa-user"></i>
+                        Welcome, {{ user.username }}!
+                    </p>
+                </h3>
+                <br>
+                <h4>Account Settings</h4>
+                <hr />
+                <div class="form-group">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                </div>
+                <br>
+                <h4>Personal Info</h4>
+                <hr />
+                <div class="form-group">
+                    {{ form.first_name.label_tag }}
+                    {{ form.first_name }}
+                </div>
+                <div class="form-group">
+                    {{ form.last_name.label_tag }}
+                    {{ form.last_name }}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="next" value="/" />
+                    <input type="submit" value="Edit" class="btn btn-primary" />
+                    <input type="reset" value="Reset" class="btn btn-secondary" />
+                </div>
+                {% if form.errors %}
+                <p class="validation-summary-errors">Please enter a correct user name and password.</p>
+                {% endif %}
+            </form>
+        </section>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    {% load staticfiles %}
+    <script src="{% static 'scripts/jquery.validate.min.js' %}"></script>
+{% endblock %}

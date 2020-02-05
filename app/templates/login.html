@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            <form action="." method="post" class="form-horizontal">
+                {% csrf_token %}
+                <h3>
+                    <p>
+                        <i class="fas fa-user"></i>
+                        Log In
+                    </p>
+                </h3>
+
+                <hr />
+                <div class="form-group">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="next" value="/" />
+                    <input type="submit" value="Log in" class="btn btn-primary" />
+                </div>
+                {% if form.errors %}
+                <p class="validation-summary-errors">Please enter a correct user name and password.</p>
+                {% endif %}
+            </form>
+        </section>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    {% load staticfiles %}
+    <script src="{% static 'scripts/jquery.validate.min.js' %}"></script>
+{% endblock %}
